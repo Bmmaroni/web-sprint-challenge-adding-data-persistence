@@ -1,12 +1,13 @@
 // build your `/api/projects` router here
 const express = require("express")
 const project = require("./model")
+const db = require("../../data/dbConfig")
 
 const router = express.Router()
 
 router.get("/", async (req, res, next) => {
 	try {
-		res.status(200).json(await project.getProjects)
+		res.json(await project.getProjects())
 	} catch (err) {
 		next(err)
 	}
@@ -14,8 +15,7 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
 	try {
-		const createdProject = await project.getProjects(req.body)
-		res.status(201).json(createdProject)
+		res.status(201).json(await project.addProject(req.body))
 	} catch (err) {
 		next(err)
 	}

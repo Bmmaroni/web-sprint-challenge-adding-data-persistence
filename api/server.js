@@ -11,9 +11,9 @@ const server = express();
 server.use(helmet())
 server.use(express.json())
 
-server.use('/api/project', projectRouter)
-server.use('/api/task', taskRouter)
-server.use('/api/resource', resourceRouter)
+server.use('/api/projects', projectRouter)
+server.use('/api/tasks', taskRouter)
+server.use('/api/resources', resourceRouter)
 
 server.use((err, req, res, next) => {
 	console.log(err)

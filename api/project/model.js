@@ -18,10 +18,11 @@ async function addProject(project) {
 			project_description: project.project_description,
 			project_completed: project.project_completed
 		})
-	return getByProjectID(newProject) // does this need to be newProject.project_id
+	return getByProjectID(newProject)
 }
 
 module.exports = {
 	getProjects,
+	getByProjectID,
 	addProject
 }
