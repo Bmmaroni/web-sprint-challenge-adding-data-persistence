@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get("/", async (req, res, next) => {
 	try {
-
+		res.json(await resource.getResources())
 	} catch (err) {
 		next(err)
 	}
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
 	try {
-
+		res.status(201).json(await resource.addResource(req.body))
 	} catch (err) {
 		next(err)
 	}
