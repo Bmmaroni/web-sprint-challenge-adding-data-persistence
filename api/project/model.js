@@ -3,21 +3,25 @@ const db = require("../../data/dbConfig")
 
 async function getProjects() {
 	const projects = await db("projects")
-		.select("*")
 	return projects.map(project => {
-		if (project.project_completed === 1) {
-			project.project_completed = true
-		} else if (project.project_completed === 0){
-			project.project_completed = false
+		return {
+			...project,
+			project_completed: (project.project_completed == 1 ? true : false)
 		}
-		return projects
 	})
 }
 
-function getByProjectID(project_id) {
-	return db("projects")
+async function getByProjectID(project_id) {
+	const project = await db("projects")
 		.where("project_id", project_id)
 		.first()
+	if(project) {
+		return{
+			...project,
+			project_completed: (project.project_completed == 1 ? true : false)
+		}
+	}
+	return project
 }
 
 async function addProject(project) {
@@ -25,7 +29,7 @@ async function addProject(project) {
 		.insert({
 			project_name: project.project_name,
 			project_description: project.project_description,
-			project_completed: project.project_completed
+			project_completed: (project.project_completed === true ? 1 : 0)
 		})
 	return getByProjectID(newProject)
 }
