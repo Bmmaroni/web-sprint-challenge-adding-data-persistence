@@ -12,6 +12,12 @@ function getTaskByID(task_id) {
 }
 
 async function addTask(task) {
+	if (task.task_completed === 1) {
+		task.task_completed = true
+	} else if (task.task_completed === 0) {
+		task.task_completed = false
+	}
+
 	const newTask = await db("tasks")
 		.insert({
 			task_description: task.task_description,
