@@ -12,6 +12,12 @@ function getByProjectID(project_id) {
 }
 
 async function addProject(project) {
+	if (project.project_completed === 1) {
+		project.project_completed = true
+	} else if (project.project_completed === 0) {
+		project.project_completed = false
+	}
+
 	const newProject = await db("projects")
 		.insert({
 			project_name: project.project_name,
