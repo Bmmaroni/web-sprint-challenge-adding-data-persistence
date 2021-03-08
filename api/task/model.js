@@ -17,8 +17,7 @@ async function addTask(task) {
 			task_description: task.task_description,
 			task_notes: task.task_notes,
 			task_completed: task.task_completed,
-			project_name: task.project_name,
-			project_description: task.project_description
+			project_id: task.project_id
 		})
 	return getTaskByID(newTask)
 } 
