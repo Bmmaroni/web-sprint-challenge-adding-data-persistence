@@ -15,7 +15,7 @@ async function getTasks() {
 }
 
 async function getTaskByID(task_id) {
-	const task = db("tasks as t")
+	const task = await db("tasks as t")
 		.where("task_id", task_id)
 		.first()
 		.join("projects as p", "t.project_id", "p.project_id")
