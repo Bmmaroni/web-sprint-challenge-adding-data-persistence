@@ -14,8 +14,8 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
 	try {
-		console.log(req.body)
-		res.status(201).json(await task.addTask(req.body))
+		const newTask = await task.addTask(req.body)
+		res.status(201).json(newTask)
 	} catch (err) {
 		next(err)
 	}
