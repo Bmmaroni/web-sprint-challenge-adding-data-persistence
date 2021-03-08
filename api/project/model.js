@@ -1,8 +1,17 @@
 // build your `Project` model here
 const db = require("../../data/dbConfig")
 
-function getProjects() {
-	return db("projects")
+async function getProjects() {
+	const projects = await db("projects")
+		.select("*")
+	return projects.map(project => {
+		if (project.project_completed === 1) {
+			project.project_completed = true
+		} else if (project.project_completed === 0){
+			project.project_completed = false
+		}
+		return projects
+	})
 }
 
 function getByProjectID(project_id) {
@@ -12,12 +21,6 @@ function getByProjectID(project_id) {
 }
 
 async function addProject(project) {
-	if (project.project_completed == 1) {
-		project.project_completed = true
-	} else if (project.project_completed == 0) {
-		project.project_completed = false
-	}
-
 	const newProject = await db("projects")
 		.insert({
 			project_name: project.project_name,
